@@ -16,8 +16,8 @@ Language and hardware
 The code also utilizes the `Mako <https://github.com/sqlalchemy/mako>`_ template manager for adjustments to data types and *native* functions. It has been tested on GPU and CPU devices using NVIDIA, AMD, and Apple platforms. 
 It demonstrates robust performance on GPUs, while the `OpenMP implementation <https://github.com/hightower8083/chimera>`_ offers significant speed on CPUs.
 
-Installation
-^^^^^^^^^^^^
+Installing
+^^^^^^^^^^
 
 Once **openCL** and **PyOpenCL** are installed (e.g., via `conda` or `pip`) and configured on your machine, **SynchRad** can be installed by cloning the source and executing the `setup.py` script::
 
@@ -52,6 +52,18 @@ Author and Contributions
 This software was developed by Igor A Andriyash (igor.andriyash@gmail.com) and is still in its early development stages.
 
 All contributions are welcome, whether for testing, benchmarking, optimization, or the addition of utility methods.
+
+
+.. raw:: html
+
+   <style>
+   /* front page: hide chapter titles
+    * needed for consistent HTML-PDF-EPUB chapters
+    */
+   section#installation {
+       display:none;
+   }
+   </style>
 
 
 Installation
