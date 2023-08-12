@@ -25,11 +25,11 @@ If you are new to this system, **please see the following resources**:
 Preparation
 -----------
 
-Use the following commands to download the WarpX source code:
+Use the following commands to download the SynchRad source code:
 
 .. code-block:: bash
 
-   git clone https://github.com/ECP-WarpX/WarpX.git $HOME/src/warpx
+   git clone https://github.com/hightower8083/synchrad.git $HOME/src/synchrad
 
 On Karolina, you can run either on GPU nodes with fast A100 GPUs (recommended) or CPU nodes.
 
@@ -37,23 +37,23 @@ On Karolina, you can run either on GPU nodes with fast A100 GPUs (recommended) o
 
    .. tab-item:: A100 GPUs
 
-      We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_warpx.profile``.
+      We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_synchrad.profile``.
       Create it now:
 
       .. code-block:: bash
 
-         cp $HOME/src/warpx/Tools/machines/karolina-it4i/karolina_gpu_warpx.profile.example $HOME/karolina_gpu_warpx.profile
+         cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example $HOME/karolina_gpu_synchrad.profile
 
       .. dropdown:: Script Details
          :color: light
          :icon: info
          :animate: fade-in-slide-down
 
-         .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu_warpx.profile.example
+         .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example
             :language: bash
 
       Edit the 2nd line of this script, which sets the ``export proj=""`` variable.
-      For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_gpu_warpx.profile``.
+      For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_gpu_synchrad.profile``.
       Enter the edit mode by typing ``i`` and edit line 2 to read:
 
       .. code-block:: bash
@@ -68,14 +68,14 @@ On Karolina, you can run either on GPU nodes with fast A100 GPUs (recommended) o
 
          .. code-block:: bash
 
-            source $HOME/karolina_gpu_warpx.profile
+            source $HOME/karolina_gpu_synchrad.profile
 
       Finally, since Karolina does not yet provide software modules for some of our dependencies, install them once:
 
       .. code-block:: bash
 
-         bash $HOME/src/warpx/Tools/machines/karolina-it4i/install_gpu_dependencies.sh
-         source $HOME/sw/karolina/gpu/venvs/warpx-gpu/bin/activate
+         bash $HOME/src/synchrad/Tools/machines/karolina-it4i/install_gpu_dependencies.sh
+         source $HOME/sw/karolina/gpu/venvs/synchrad-gpu/bin/activate
 
       .. dropdown:: Script Details
          :color: light
@@ -104,7 +104,7 @@ Use the following :ref:`cmake commands <building-cmake>` to compile:
 
       .. code-block:: bash
 
-         cd $HOME/src/warpx
+         cd $HOME/src/synchrad
          rm -rf build_gpu
 
          cmake -S . -B build_gpu -DWarpX_COMPUTE=CUDA -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
@@ -112,13 +112,13 @@ Use the following :ref:`cmake commands <building-cmake>` to compile:
          cmake --build build_gpu -j 12 --target pip_install
 
       **That's it!**
-      The WarpX application executables are now in ``$HOME/src/warpx/build_gpu/bin/`` and we installed the ``pywarpx`` Python module.
+      The SynchRad application executables are now in ``$HOME/src/synchrad/build_gpu/bin/`` and we installed the ``synchrad`` Python module.
 
    .. tab-item:: CPU Nodes
 
       .. code-block:: bash
 
-         cd $HOME/src/warpx
+         cd $HOME/src/synchrad
          rm -rf build_cpu
 
          cmake -S . -B build_cpu -DWarpX_COMPUTE=OMP -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
@@ -126,28 +126,28 @@ Use the following :ref:`cmake commands <building-cmake>` to compile:
          cmake --build build_cpu -j 12 --target pip_install
 
       **That's it!**
-      The WarpX application executables are now in ``$HOME/src/warpx/build_cpu/bin/`` and we installed the ``pywarpx`` Python module.
+      The SynchRad application executables are now in ``$HOME/src/synchrad/build_cpu/bin/`` and we installed the ``synchrad`` Python module.
 
-Now, you can :ref:`submit Karolina compute jobs <running-cpp-karolina>` for WarpX :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
-Or, you can use the WarpX executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
+Now, you can :ref:`submit Karolina compute jobs <running-cpp-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
+Or, you can use the SynchRad executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
 For executables, you can reference their location in your :ref:`job script <running-cpp-karolina>` or copy them to a location in ``/scatch/``.
 
 
 .. _building-karolina-update:
 
-Update WarpX & Dependencies
+Update SynchRad & Dependencies
 ---------------------------
 
-If you already installed WarpX in the past and want to update it, start by getting the latest source code:
+If you already installed SynchRad in the past and want to update it, start by getting the latest source code:
 
 .. code-block:: bash
 
-   cd $HOME/src/warpx
+   cd $HOME/src/synchrad
 
    # read the output of this command - does it look ok?
    git status
 
-   # get the latest WarpX source code
+   # get the latest SynchRad source code
    git fetch
    git pull
 
@@ -157,11 +157,11 @@ If you already installed WarpX in the past and want to update it, start by getti
 
 And, if needed,
 
-- :ref:`update the karolina_gpu_warpx.profile or karolina_cpu_warpx.profile files <building-karolina-preparation>`,
+- :ref:`update the karolina_gpu_synchrad.profile or karolina_cpu_synchrad.profile files <building-karolina-preparation>`,
 - log out and into the system, activate the now updated environment profile as usual,
 - :ref:`execute the dependency install scripts <building-karolina-preparation>`.
 
-As a last step, clean the build directory ``rm -rf $HOME/src/warpx/build_*`` and rebuild WarpX.
+As a last step, clean the build directory ``rm -rf $HOME/src/synchrad/build_*`` and rebuild SynchRad.
 
 
 .. _running-cpp-karolina:
@@ -173,7 +173,7 @@ Running
 
    .. tab-item:: A100 (40GB) GPUs
 
-      The batch script below can be used to run a WarpX simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
+      The batch script below can be used to run a SynchRad simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
       This partition as up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
       Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz processors.
 
@@ -182,7 +182,7 @@ Running
 
       .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
          :language: bash
-         :caption: You can copy this file from ``$HOME/src/warpx/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
+         :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
 
       To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and run
 
