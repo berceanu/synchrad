@@ -64,6 +64,8 @@ Exit the ``vi`` editor with ``Esc`` and then type ``:wq`` (write & quit).
    .. code-block:: bash
 
       source $HOME/karolina_gpu_synchrad.profile
+   
+   You can add the line above to your ``$HOME/.bashrc`` file.
 
 Finally, since Karolina does not yet provide software modules for some of our dependencies, install them once:
 
