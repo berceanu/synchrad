@@ -46,6 +46,7 @@ Create it now:
 
    .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_synchrad.profile.example
       :language: bash
+      :caption: ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_synchrad.profile.example``.
 
 Edit the 2nd line of this script, which sets the ``export proj=""`` variable.
 For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_synchrad.profile``.
@@ -82,6 +83,7 @@ install them once, and activate the newly created ``Python`` virtual environment
 
    .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_dependencies.sh
       :language: bash
+      :caption: ``$HOME/src/synchrad/Tools/machines/karolina-it4i/install_dependencies.sh``.
 
 Now, you can :ref:`submit Karolina compute jobs <running-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
 Or, you can use the SynchRad executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
