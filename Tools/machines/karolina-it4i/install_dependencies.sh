@@ -7,8 +7,8 @@ set -eu -o pipefail
 
 # Check: ######################################################################
 #
-#   Was karolina_gpu_synchrad.profile sourced and configured correctly?
-if [ -z ${proj-} ]; then echo "WARNING: The 'proj' variable is not yet set in your karolina_gpu_synchrad.profile file! Please edit its line 2 to continue!"; exit 1; fi
+#   Was karolina_synchrad.profile sourced and configured correctly?
+if [ -z ${proj-} ]; then echo "WARNING: The 'proj' variable is not yet set in your karolina_synchrad.profile file! Please edit its line 2 to continue!"; exit 1; fi
 
 
 # Remove old dependencies #####################################################
@@ -41,4 +41,3 @@ python3 -m pip install --upgrade openpmd-api
 python3 -m pip install --upgrade openpmd-viewer
 python3 -m pip install --upgrade mpi4py --no-cache-dir --no-build-isolation --no-binary mpi4py
 python3 -m pip install --upgrade numba
-python3 -m pip install --upgrade https://github.com/hightower8083/synchrad/archive/refs/heads/dev.zip
