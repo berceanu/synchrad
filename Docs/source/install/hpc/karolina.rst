@@ -31,7 +31,7 @@ Use the following commands to download the SynchRad source code:
 
    git clone https://github.com/hightower8083/synchrad.git $HOME/src/synchrad
 
-On Karolina, you can run either on GPU nodes with fast A100 GPUs (recommended) or CPU nodes.
+On Karolina, we recommend running on the accelerator nodes with fast A100 GPUs.
 
 .. tab-set::
 
@@ -84,11 +84,6 @@ On Karolina, you can run either on GPU nodes with fast A100 GPUs (recommended) o
 
          .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_gpu_dependencies.sh
             :language: bash
-
-
-   .. tab-item:: CPU Nodes
-
-      CPU usage is documentation is TODO.
 
 
 .. _building-karolina-compilation:
