@@ -13,7 +13,6 @@ If you are new to this system, **please see the following resources**:
 
 * `IT4I user guide <https://docs.it4i.cz>`__
 * Batch system: `PBS <https://docs.it4i.cz/general/job-submission-and-execution/>`__
-* Jupyter service: not provided/documented (yet)
 * `Filesystems <https://docs.it4i.cz/karolina/storage/>`__:
 
   * ``$HOME``: per-user directory, use only for inputs, source and scripts; backed up (25GB default quota)
@@ -29,8 +28,8 @@ Use the following commands to download the SynchRad source code:
 
 .. code-block:: bash
 
-   git clone https://github.com/hightower8083/synchrad.git $HOME/src/synchrad
-
+   git clone https://github.com/berceanu/synchrad.git $HOME/src/synchrad
+   
 On Karolina, we recommend running on the accelerator nodes with fast A100 GPUs.
 
 We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_synchrad.profile``.
@@ -81,26 +80,6 @@ Finally, since Karolina does not yet provide software modules for some of our de
    .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_gpu_dependencies.sh
       :language: bash
 
-
-.. _building-karolina-compilation:
-
-Compilation
------------
-
-Use the following :ref:`cmake commands <building-cmake>` to compile:
-
-
-.. code-block:: bash
-
-   cd $HOME/src/synchrad
-   rm -rf build_gpu
-
-   cmake -S . -B build_gpu -DWarpX_COMPUTE=CUDA -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
-   cmake --build build_gpu -j 12
-   cmake --build build_gpu -j 12 --target pip_install
-
-**That's it!**
-The SynchRad application executables are now in ``$HOME/src/synchrad/build_gpu/bin/`` and we installed the ``synchrad`` Python module.
 
 
 Now, you can :ref:`submit Karolina compute jobs <running-cpp-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
@@ -163,16 +142,3 @@ To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and ru
    qsub karolina_gpu.qsub
 
 to submit the job.
-
-
-
-
-.. _post-processing-karolina:
-
-Post-Processing
----------------
-
-.. note::
-
-   This section was not yet written.
-   Usually, we document here how to use a Jupyter service.
