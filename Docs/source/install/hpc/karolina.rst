@@ -124,7 +124,6 @@ As a last step, ...
 Running
 -------
 
-
 The batch script below can be used to run a SynchRad simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
 This partition as up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
 Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz processors.
@@ -132,9 +131,14 @@ Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz proce
 Replace descriptions between chevrons ``<>`` by relevant values, for instance ``<proj>`` could be ``DD-23-83``.
 Note that we run one MPI rank per GPU.
 
-.. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
-   :language: bash
-   :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
+.. dropdown:: Script Details
+   :color: light
+   :icon: info
+   :animate: fade-in-slide-down
+
+   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
+      :language: bash
+      :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
 
 To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and run
 
