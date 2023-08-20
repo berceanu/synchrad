@@ -33,57 +33,53 @@ Use the following commands to download the SynchRad source code:
 
 On Karolina, we recommend running on the accelerator nodes with fast A100 GPUs.
 
-.. tab-set::
+We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_synchrad.profile``.
+Create it now:
 
-   .. tab-item:: A100 GPUs
+.. code-block:: bash
 
-      We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_synchrad.profile``.
-      Create it now:
+   cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example $HOME/karolina_gpu_synchrad.profile
 
-      .. code-block:: bash
+.. dropdown:: Script Details
+   :color: light
+   :icon: info
+   :animate: fade-in-slide-down
 
-         cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example $HOME/karolina_gpu_synchrad.profile
+   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example
+      :language: bash
 
-      .. dropdown:: Script Details
-         :color: light
-         :icon: info
-         :animate: fade-in-slide-down
+Edit the 2nd line of this script, which sets the ``export proj=""`` variable.
+For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_gpu_synchrad.profile``.
+Enter the edit mode by typing ``i`` and edit line 2 to read:
 
-         .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example
-            :language: bash
+.. code-block:: bash
 
-      Edit the 2nd line of this script, which sets the ``export proj=""`` variable.
-      For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_gpu_synchrad.profile``.
-      Enter the edit mode by typing ``i`` and edit line 2 to read:
+   export proj="DD-23-83"
 
-      .. code-block:: bash
+Exit the ``vi`` editor with ``Esc`` and then type ``:wq`` (write & quit).
 
-         export proj="DD-23-83"
+.. important::
 
-      Exit the ``vi`` editor with ``Esc`` and then type ``:wq`` (write & quit).
+   Now, and as the first step on future logins to Karolina, activate these environment settings:
 
-      .. important::
+   .. code-block:: bash
 
-         Now, and as the first step on future logins to Karolina, activate these environment settings:
+      source $HOME/karolina_gpu_synchrad.profile
 
-         .. code-block:: bash
+Finally, since Karolina does not yet provide software modules for some of our dependencies, install them once:
 
-            source $HOME/karolina_gpu_synchrad.profile
+.. code-block:: bash
 
-      Finally, since Karolina does not yet provide software modules for some of our dependencies, install them once:
+   bash $HOME/src/synchrad/Tools/machines/karolina-it4i/install_gpu_dependencies.sh
+   source $HOME/sw/karolina/gpu/venvs/synchrad-gpu/bin/activate
 
-      .. code-block:: bash
+.. dropdown:: Script Details
+   :color: light
+   :icon: info
+   :animate: fade-in-slide-down
 
-         bash $HOME/src/synchrad/Tools/machines/karolina-it4i/install_gpu_dependencies.sh
-         source $HOME/sw/karolina/gpu/venvs/synchrad-gpu/bin/activate
-
-      .. dropdown:: Script Details
-         :color: light
-         :icon: info
-         :animate: fade-in-slide-down
-
-         .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_gpu_dependencies.sh
-            :language: bash
+   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_gpu_dependencies.sh
+      :language: bash
 
 
 .. _building-karolina-compilation:
@@ -93,35 +89,19 @@ Compilation
 
 Use the following :ref:`cmake commands <building-cmake>` to compile:
 
-.. tab-set::
 
-   .. tab-item:: A100 GPUs
+.. code-block:: bash
 
-      .. code-block:: bash
+   cd $HOME/src/synchrad
+   rm -rf build_gpu
 
-         cd $HOME/src/synchrad
-         rm -rf build_gpu
+   cmake -S . -B build_gpu -DWarpX_COMPUTE=CUDA -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
+   cmake --build build_gpu -j 12
+   cmake --build build_gpu -j 12 --target pip_install
 
-         cmake -S . -B build_gpu -DWarpX_COMPUTE=CUDA -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
-         cmake --build build_gpu -j 12
-         cmake --build build_gpu -j 12 --target pip_install
+**That's it!**
+The SynchRad application executables are now in ``$HOME/src/synchrad/build_gpu/bin/`` and we installed the ``synchrad`` Python module.
 
-      **That's it!**
-      The SynchRad application executables are now in ``$HOME/src/synchrad/build_gpu/bin/`` and we installed the ``synchrad`` Python module.
-
-   .. tab-item:: CPU Nodes
-
-      .. code-block:: bash
-
-         cd $HOME/src/synchrad
-         rm -rf build_cpu
-
-         cmake -S . -B build_cpu -DWarpX_COMPUTE=OMP -DWarpX_PSATD=ON -DWarpX_QED_TABLE_GEN=ON -DWarpX_LIB=ON -DWarpX_DIMS="1;2;RZ;3"
-         cmake --build build_cpu -j 12
-         cmake --build build_cpu -j 12 --target pip_install
-
-      **That's it!**
-      The SynchRad application executables are now in ``$HOME/src/synchrad/build_cpu/bin/`` and we installed the ``synchrad`` Python module.
 
 Now, you can :ref:`submit Karolina compute jobs <running-cpp-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
 Or, you can use the SynchRad executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
@@ -164,33 +144,27 @@ As a last step, clean the build directory ``rm -rf $HOME/src/synchrad/build_*`` 
 Running
 -------
 
-.. tab-set::
 
-   .. tab-item:: A100 (40GB) GPUs
+The batch script below can be used to run a SynchRad simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
+This partition as up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
+Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz processors.
 
-      The batch script below can be used to run a SynchRad simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
-      This partition as up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
-      Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz processors.
+Replace descriptions between chevrons ``<>`` by relevant values, for instance ``<proj>`` could be ``DD-23-83``.
+Note that we run one MPI rank per GPU.
 
-      Replace descriptions between chevrons ``<>`` by relevant values, for instance ``<proj>`` could be ``DD-23-83``.
-      Note that we run one MPI rank per GPU.
+.. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
+   :language: bash
+   :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
 
-      .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
-         :language: bash
-         :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
+To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and run
 
-      To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and run
+.. code-block:: bash
 
-      .. code-block:: bash
+   qsub karolina_gpu.qsub
 
-         qsub karolina_gpu.qsub
-
-      to submit the job.
+to submit the job.
 
 
-   .. tab-item:: CPU Nodes
-
-      CPU usage is documentation is TODO.
 
 
 .. _post-processing-karolina:
