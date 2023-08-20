@@ -32,23 +32,23 @@ Use the following commands to download the SynchRad source code:
    
 On Karolina, we recommend running on the accelerator nodes with fast A100 GPUs.
 
-We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_gpu_synchrad.profile``.
+We use system software modules, add environment hints and further dependencies via the file ``$HOME/karolina_synchrad.profile``.
 Create it now:
 
 .. code-block:: bash
 
-   cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example $HOME/karolina_gpu_synchrad.profile
+   cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_synchrad.profile.example $HOME/karolina_synchrad.profile
 
 .. dropdown:: Script Details
    :color: light
    :icon: info
    :animate: fade-in-slide-down
 
-   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu_synchrad.profile.example
+   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_synchrad.profile.example
       :language: bash
 
 Edit the 2nd line of this script, which sets the ``export proj=""`` variable.
-For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_gpu_synchrad.profile``.
+For example, if you are member of the project ``DD-23-83``, then run ``vi $HOME/karolina_synchrad.profile``.
 Enter the edit mode by typing ``i`` and edit line 2 to read:
 
 .. code-block:: bash
@@ -63,30 +63,29 @@ Exit the ``vi`` editor with ``Esc`` and then type ``:wq`` (write & quit).
 
    .. code-block:: bash
 
-      source $HOME/karolina_gpu_synchrad.profile
+      source $HOME/karolina_synchrad.profile
    
    You can add the line above to your ``$HOME/.bashrc`` file.
 
-Finally, since Karolina does not yet provide software modules for some of our dependencies, install them once:
+Finally, since Karolina does not yet provide software modules for some of our dependencies, 
+install them once, and activate the newly created ``Python`` virtual environment:
 
 .. code-block:: bash
 
-   bash $HOME/src/synchrad/Tools/machines/karolina-it4i/install_gpu_dependencies.sh
-   source $HOME/sw/karolina/gpu/venvs/synchrad-gpu/bin/activate
+   bash $HOME/src/synchrad/Tools/machines/karolina-it4i/install_dependencies.sh
+   source $HOME/sw/karolina/gpu/venvs/synchrad/bin/activate
 
 .. dropdown:: Script Details
    :color: light
    :icon: info
    :animate: fade-in-slide-down
 
-   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_gpu_dependencies.sh
+   .. literalinclude:: ../../../../Tools/machines/karolina-it4i/install_dependencies.sh
       :language: bash
 
-
-
-Now, you can :ref:`submit Karolina compute jobs <running-cpp-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
+Now, you can :ref:`submit Karolina compute jobs <running-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
 Or, you can use the SynchRad executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
-For executables, you can reference their location in your :ref:`job script <running-cpp-karolina>` or copy them to a location in ``/scatch/``.
+For executables, you can reference their location in your :ref:`job script <running-karolina>` or copy them to a location in ``/scatch/``.
 
 
 .. _building-karolina-update:
@@ -113,14 +112,14 @@ If you already installed SynchRad in the past and want to update it, start by ge
 
 And, if needed,
 
-- :ref:`update the karolina_gpu_synchrad.profile or karolina_cpu_synchrad.profile files <building-karolina-preparation>`,
+- :ref:`update the karolina_synchrad.profile file <building-karolina-preparation>`,
 - log out and into the system, activate the now updated environment profile as usual,
-- :ref:`execute the dependency install scripts <building-karolina-preparation>`.
+- :ref:`execute the dependency install script <building-karolina-preparation>`.
 
-As a last step, clean the build directory ``rm -rf $HOME/src/synchrad/build_*`` and rebuild SynchRad.
+As a last step, ... 
 
 
-.. _running-cpp-karolina:
+.. _running-karolina:
 
 Running
 -------
