@@ -1,0 +1,21 @@
+#!/bin/bash -l
+
+#PBS -q qgpu
+#PBS -N synchrad
+#PBS -l select=2:ncpus=128:ngpus=8:mpiprocs=8:ompthreads=16,walltime=00:55:00
+#PBS -A DD-23-83
+
+cd ${PBS_O_WORKDIR}
+
+# executable & inputs file or python interpreter & PICMI script here
+EXE=${HOME}/src/warpx/build/bin/warpx.3d.MPI.CUDA.DP.PDP.OPMD.QED
+INPUTS=${PBS_O_WORKDIR}/uniform_plasma_3d
+
+# OpenMP threads
+export OMP_NUM_THREADS=16
+
+# run
+mpirun -n 16 bash -c "
+    export CUDA_VISIBLE_DEVICES=\${OMPI_COMM_WORLD_LOCAL_RANK};
+    ${EXE} ${INPUTS}" \
+  > output_2.txt
