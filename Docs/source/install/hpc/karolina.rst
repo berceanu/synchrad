@@ -66,10 +66,11 @@ Exit the ``vi`` editor with ``Esc`` and then type ``:wq`` (write & quit).
 
       source $HOME/karolina_synchrad.profile
    
-   You can add the line above to your ``$HOME/.bashrc`` file.
+   You can also add the line above to your ``$HOME/.bashrc`` file so that it is loaded on each login.
 
 Finally, since Karolina does not yet provide software modules for some of our dependencies, 
-install them once, and activate the newly created ``Python`` virtual environment:
+install them once, and activate the newly created ``Python`` virtual environment. Further
+environment activations will be done automatically from inside ``karolina_synchrad.profile``.
 
 .. code-block:: bash
 
@@ -85,9 +86,14 @@ install them once, and activate the newly created ``Python`` virtual environment
       :language: bash
       :caption: ``$HOME/src/synchrad/Tools/machines/karolina-it4i/install_dependencies.sh``.
 
-Now, you can :ref:`submit Karolina compute jobs <running-karolina>` for SynchRad :ref:`Python (PICMI) scripts <usage-picmi>` (:ref:`example scripts <usage-examples>`).
-Or, you can use the SynchRad executables to submit Karolina jobs (:ref:`example inputs <usage-examples>`).
-For executables, you can reference their location in your :ref:`job script <running-karolina>` or copy them to a location in ``/scatch/``.
+Finally, install ``SynchRad`` itself in "editable" mode, using:
+
+.. code-block:: bash
+   
+   cd $HOME/src/synchrad
+   python3 -m pip install -e .
+
+Now, you can :ref:`submit Karolina compute jobs <running-karolina>` for SynchRad Python scripts.
 
 
 .. _building-karolina-update:
@@ -118,16 +124,19 @@ And, if needed,
 - log out and into the system, activate the now updated environment profile as usual,
 - :ref:`execute the dependency install script <building-karolina-preparation>`.
 
-As a last step, ... 
+As a last step, reinstall ``SynchRad`` in case the dependencies have changed:
 
+.. code-block:: bash
+   
+   python3 -m pip install -e .
 
 .. _running-karolina:
 
 Running
 -------
 
-The batch script below can be used to run a SynchRad simulation on multiple GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
-This partition as up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
+The batch script below can be used to run a SynchRad simulation on two GPU nodes (change ``#PBS -l select=`` accordingly) on the supercomputer Karolina at IT4I.
+This partition has up to `72 nodes <https://docs.it4i.cz/karolina/hardware-overview/>`__.
 Every node has 8x A100 (40GB) GPUs and 2x AMD EPYC 7763, 64-core, 2.45 GHz processors.
 
 Replace descriptions between chevrons ``<>`` by relevant values, for instance ``<proj>`` could be ``DD-23-83``.
