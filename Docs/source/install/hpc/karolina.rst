@@ -134,11 +134,15 @@ And, if needed,
 - log out and into the system, activate the now updated environment profile as usual,
 - :ref:`execute the dependency install script <building-karolina-preparation>`.
 
-As a last step, reinstall ``SynchRad`` in case the dependencies have changed:
+As a last step, reinstall ``SynchRad``: 
 
 .. code-block:: bash
    
    python3 -m pip install -e .
+
+This is only needed in case the dependencies have changed, otherwise the "editable" install should automatically
+reflect the latest ``git`` changes without needing to reinstall the package.
+
 
 .. _running-karolina:
 
