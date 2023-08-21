@@ -183,6 +183,9 @@ To run a simulation, copy the lines above to a file ``karolina_gpu.qsub``
 
 and run
 
+..
+  #TODO: update PBS script to use 8 GPUs
+
 .. code-block:: bash
 
    cd $SCRDIR/runs/synchrad
