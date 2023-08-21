@@ -41,3 +41,5 @@ python3 -m pip install --upgrade openpmd-api
 python3 -m pip install --upgrade openpmd-viewer
 python3 -m pip install --upgrade mpi4py --no-cache-dir --no-build-isolation --no-binary mpi4py
 python3 -m pip install --upgrade numba
+python3 -m pip install --upgrade mako
+python3 -m pip install --upgrade pyopencl
