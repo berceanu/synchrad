@@ -37,6 +37,10 @@ Use the following commands to download the SynchRad source code:
 
 .. code-block:: bash
 
+   # optionally, remove any previous installs if necessary
+   rm -rf $HOME/src/synchrad
+   rm -rf $HOME/sw/karolina/gpu/venvs/synchrad
+
    git clone https://github.com/berceanu/synchrad.git $HOME/src/synchrad
    
 On Karolina, we recommend running on the accelerator nodes with fast A100 GPUs.
@@ -146,7 +150,7 @@ As a last step, reinstall ``SynchRad``:
    python3 -m pip install -e .
 
 This is only needed in case the dependencies have changed, otherwise the "editable" install should automatically
-reflect the latest ``git`` changes without needing to reinstall the package.
+reflect the latest changes pulled from ``git``, without needing to reinstall the package.
 
 
 .. _running-karolina:
