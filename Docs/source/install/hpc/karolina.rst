@@ -98,6 +98,11 @@ environment activations will be done automatically from inside ``karolina_synchr
 Finally, install ``SynchRad`` itself. This will install the package in "editable" mode,
 meaning any changes you make to the local source code will immediately be reflected in the installed package:
 
+..
+  #TODO: replace editable install with normal install
+  #TODO: replace berceanu with hightower8083
+  #TODO: open PR for Sphinx documentation
+
 .. code-block:: bash
    
    cd $HOME/src/synchrad
