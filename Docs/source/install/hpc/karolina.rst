@@ -172,6 +172,7 @@ and run
 
 .. code-block:: bash
 
+   cd $SCRDIR/runs/synchrad
    qsub karolina_gpu.qsub
 
 to submit the job.
