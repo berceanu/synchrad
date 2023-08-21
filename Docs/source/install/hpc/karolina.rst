@@ -15,9 +15,18 @@ If you are new to this system, **please see the following resources**:
 * Batch system: `PBS <https://docs.it4i.cz/general/job-submission-and-execution/>`__
 * `Filesystems <https://docs.it4i.cz/karolina/storage/>`__:
 
-  * ``$HOME``: per-user directory, use only for inputs, source and scripts; backed up (25GB default quota)
-  * ``/scatch/``: `production directory <https://docs.it4i.cz/karolina/storage/#scratch-file-system>`__; very fast for parallel jobs (20TB default)
+  * ``$HOME``: per-user directory, use only for inputs, source and scripts; backed up (25GB default quota, 5k entries)
+  * ``/scatch/``: `production directory <https://docs.it4i.cz/karolina/storage/#scratch-file-system>`__; very fast for parallel jobs (10TB, 10M entries per user)
+  * ``/mnt/``: project file system (20TB, 5M entries per project)
 
+For convenience, add the following variables to your ``.bashrc``:
+
+.. code-block:: bash
+
+   export SCRDIR="/scratch/project/dd-23-83/${USER}"
+   export WRKDIR="/mnt/proj2/dd-23-83/${USER}"
+
+where ``dd-23-83`` is the project identifier, which can be different in your case.
 
 .. _building-karolina-preparation:
 
@@ -150,9 +159,16 @@ Note that we run one MPI rank per GPU.
 
    .. literalinclude:: ../../../../Tools/machines/karolina-it4i/karolina_gpu.qsub
       :language: bash
-      :caption: You can copy this file from ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
+      :caption: ``$HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub``.
 
-To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` and run
+To run a simulation, copy the lines above to a file ``karolina_gpu.qsub`` 
+
+.. code-block:: bash
+   
+   mkdir -p $SCRDIR/runs/synchrad
+   cp $HOME/src/synchrad/Tools/machines/karolina-it4i/karolina_gpu.qsub $SCRDIR/runs/synchrad
+
+and run
 
 .. code-block:: bash
 
