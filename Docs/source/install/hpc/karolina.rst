@@ -86,7 +86,8 @@ environment activations will be done automatically from inside ``karolina_synchr
       :language: bash
       :caption: ``$HOME/src/synchrad/Tools/machines/karolina-it4i/install_dependencies.sh``.
 
-Finally, install ``SynchRad`` itself in "editable" mode, using:
+Finally, install ``SynchRad`` itself. This will install the package in "editable" mode,
+meaning any changes you make to the local source code will immediately be reflected in the installed package:
 
 .. code-block:: bash
    
