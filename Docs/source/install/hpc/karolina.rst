@@ -19,7 +19,7 @@ If you are new to this system, **please see the following resources**:
   * ``/scatch/``: `production directory <https://docs.it4i.cz/karolina/storage/#scratch-file-system>`__; very fast for parallel jobs (10TB, 10M entries per user)
   * ``/mnt/``: project file system (20TB, 5M entries per project)
 
-For convenience, add the following variables to your ``.bashrc``:
+For convenience, you can add the following variables to your ``.bashrc``:
 
 .. code-block:: bash
 
@@ -103,7 +103,7 @@ Finally, install ``SynchRad`` itself. This will install the package in "editable
 meaning any changes you make to the local source code will immediately be reflected in the installed package:
 
 ..
-  #TODO: replace editable install with normal install
+  #TODO: replace editable install with normal install, via ``python3 -m pip install .``
   #TODO: replace berceanu with hightower8083
   #TODO: open PR for Sphinx documentation
 
@@ -185,6 +185,7 @@ and run
 
 ..
   #TODO: update PBS script to use 8 GPUs
+  #TODO: copy also the example test script
 
 .. code-block:: bash
 
