@@ -8,9 +8,8 @@
 cd ${PBS_O_WORKDIR}
 
 # Python interpreter & input script here
-# TODO: test with just python3 below, to check if it picks up the venv
-INTERPRETER=${HOME}/sw/karolina/gpu/venvs/synchrad/bin/python3
-SCRIPT=${PBS_O_WORKDIR}/opencl-addition-test.py
+INTERPRETER=python3
+SCRIPT=${PBS_O_WORKDIR}/synchrad_script.py
 
 # OpenMP threads
 export OMP_NUM_THREADS=16
