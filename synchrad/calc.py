@@ -527,7 +527,6 @@ class SynchRad(Utilities):
             self.ocl_version = "None"
         else:
             try:
-                print(f"Creating context with args: {ctx_kw_args}")  # Logging
                 self.ctx = cl.create_some_context(**ctx_kw_args)
                 self.queue = cl.CommandQueue(self.ctx)
 
@@ -537,9 +536,7 @@ class SynchRad(Utilities):
 
                 self.plat_name = selected_dev.platform.vendor
                 self.ocl_version = selected_dev.opencl_c_version
-                print(f"Context created successfully on device: {self.dev_name}")  # Logging
-            except Exception as e:
-                print(f"Failed to create context: {e}")  # Error logging
+            except:
                 self.dev_type = "Starting without"
                 self.dev_name = ""
                 self.plat_name = "None"
